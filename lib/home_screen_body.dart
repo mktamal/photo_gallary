@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:photo_gallary/image_detail.dart';
+import 'classes/image_data.dart';
 
-class ImageData {
-  final String? fileName;
-  final String? imageTitle;
-  final String? description;
 
-  ImageData({this.fileName, this.imageTitle, this.description});
-}
 
 class HomeScreenBody extends StatelessWidget {
   final List<ImageData> imageDataList;
@@ -15,6 +11,30 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<ImageData> suggestionImageList = [
+      ImageData(
+        heading: 'Mood with Nature',
+        fileName: 'mood.jpg',
+        imageTitle: 'Mood',
+        description:
+        'Being in nature or even viewing scenes of nature, reduces anger fear and stress and '
+            'increase pleasant feelings.',
+      ),
+      ImageData(
+        heading: 'Aesthetic Nature',
+        fileName: 'aesthetic.jpg',
+        imageTitle: 'Aesthetic',
+        description: 'Aesthetic Description',
+      ),
+      ImageData(
+        heading: 'Animals in Nature',
+        fileName: 'animals.jpg',
+        imageTitle: 'Animals',
+        description: 'Animals Description',
+      ),
+    ];
+
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -23,29 +43,41 @@ class HomeScreenBody extends StatelessWidget {
         ),
         itemCount: imageDataList.length,
         itemBuilder: (context, index) {
-          return _buildImageWithTitle(imageDataList[index]);
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ImageDetailPage(
+                    heading: imageDataList[index].heading,
+                    imageTitle: imageDataList[index].imageTitle,
+                    description: imageDataList[index].description,
+                    imageFIle: imageDataList[index].fileName
+                  ),
+                ),
+              );
+            },
+            child: _buildImageWithTitle(imageDataList[index]),
+          );
+          //return _buildImageWithTitle(imageDataList[index]);
         });
   }
 }
 
 Widget _buildImageWithTitle(ImageData? imageData) {
-  return Container(
-    height: 180,
-    width: 180,
-    decoration: BoxDecoration(
-      //color: Colors.blue,
-      borderRadius: BorderRadius.circular(30),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black87,
-          offset: Offset(0, 15),
-          blurRadius: 30,
-        ),
-      ],
-    ),
-    child: Stack(
-      children: [
-        Center(
+  return Stack(
+    children: [
+      Center(
+        child: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black87,
+                offset: Offset(0, 15),
+                blurRadius: 30,
+              ),
+            ],
+          ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Image.asset(
@@ -56,25 +88,25 @@ Widget _buildImageWithTitle(ImageData? imageData) {
             ),
           ),
         ),
-        Positioned(
-          bottom: 20,
-          left: 30,
-          child: SizedBox(
-            width: 133,
-            height: 27,
-            child: Text(
-              imageData?.imageTitle ?? '',
-              style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                height: 1,
-                color: Colors.white,
-              ),
+      ),
+      Positioned(
+        bottom: 20,
+        left: 30,
+        child: SizedBox(
+          width: 133,
+          height: 27,
+          child: Text(
+            imageData?.imageTitle ?? '',
+            style: const TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              height: 1,
+              color: Colors.white,
             ),
           ),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 }
