@@ -9,6 +9,13 @@ class ImageGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    //determine height and width depending on screen size
+    double heightWidth = screenWidth > 600 ? 220 : 180;
+
+
+
     return Stack(
       children: [
         Center(
@@ -26,8 +33,8 @@ class ImageGrid extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               child: Image.asset(
                 'images/${imageData?.fileName}',
-                width: 180,
-                height: 180,
+                width: heightWidth,
+                height: heightWidth,
                 fit: BoxFit.cover,
               ),
             ),
@@ -35,7 +42,7 @@ class ImageGrid extends StatelessWidget {
         ),
         Positioned(
           bottom: 20,
-          left: 30,
+          left: 20,
           child: SizedBox(
             width: 133,
             height: 27,

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_gallary/image_detail.dart';
 import 'classes/image_data.dart';
 
-
-
 class HomeScreenBody extends StatelessWidget {
   final List<ImageData> imageDataList;
 
@@ -11,33 +9,14 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
 
-    List<ImageData> suggestionImageList = [
-      ImageData(
-        heading: 'Mood with Nature',
-        fileName: 'mood.jpg',
-        imageTitle: 'Mood',
-        description:
-        'Being in nature or even viewing scenes of nature, reduces anger fear and stress and '
-            'increase pleasant feelings.',
-      ),
-      ImageData(
-        heading: 'Aesthetic Nature',
-        fileName: 'aesthetic.jpg',
-        imageTitle: 'Aesthetic',
-        description: 'Aesthetic Description',
-      ),
-      ImageData(
-        heading: 'Animals in Nature',
-        fileName: 'animals.jpg',
-        imageTitle: 'Animals',
-        description: 'Animals Description',
-      ),
-    ];
+    //determine number items display in a raw
+    int noOfItemsToShow = screenWidth > 600 ? 4 : 2;
 
     return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: noOfItemsToShow,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
         ),
@@ -49,17 +28,15 @@ class HomeScreenBody extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ImageDetailPage(
-                    heading: imageDataList[index].heading,
-                    imageTitle: imageDataList[index].imageTitle,
-                    description: imageDataList[index].description,
-                    imageFIle: imageDataList[index].fileName
-                  ),
+                      heading: imageDataList[index].heading,
+                      imageTitle: imageDataList[index].imageTitle,
+                      description: imageDataList[index].description,
+                      imageFIle: imageDataList[index].fileName),
                 ),
               );
             },
             child: _buildImageWithTitle(imageDataList[index]),
           );
-          //return _buildImageWithTitle(imageDataList[index]);
         });
   }
 }

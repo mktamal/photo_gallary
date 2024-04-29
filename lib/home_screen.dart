@@ -61,63 +61,6 @@ class HomeScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      /*appBar: PreferredSize(
-        preferredSize: const Size(429, 98),
-        child: AppBar(
-          backgroundColor: Colors.green,
-          centerTitle: true,
-          title: Container(
-            width: 201,
-            height: 39,
-            margin: const EdgeInsets.only(top: 39),
-            child: const Text(
-              'Photo Gallery',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Poppins',
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                height: 1,
-              ),
-            ),
-          ),
-          leading: GestureDetector(
-            onTap: () {
-              // do something
-            },
-            child: Container(
-              width: 40,
-              height: 40,
-              margin: const EdgeInsets.only(
-                left: 17.24,
-                top: 29,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.lightGreen,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Icon(
-                CupertinoIcons.back,
-                color: Colors.white,
-                size: 25,
-              ),
-            ),
-          ),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                //do something
-              },
-              child: Container(
-                width: 40,
-                height: 40,
-                margin: const EdgeInsets.only(top: 29, right: 17.24),
-                child: const Icon(Icons.more_vert, color: Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),*/
 
       appBar: const CustomAppBar(
         title: 'Photo Gallery',
